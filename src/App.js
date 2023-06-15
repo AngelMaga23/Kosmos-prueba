@@ -1,24 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Component } from "./Components/Component";
+import useFetchimages from "./hooks/useFetchimages";
 
 const App = () => {
   const [moveableComponents, setMoveableComponents] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [images, setImages] = useState([]);
+  const { images } =  useFetchimages();
   const parentRef = useRef();
 
-  useEffect(() => {
-    // Realizar la solicitud a la API para obtener las imágenes
-    fetch("https://jsonplaceholder.typicode.com/photos")
-      .then((response) => response.json())
-      .then((data) => {
-        setImages(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching images:", error);
-        setImages([]);
-      });
-  }, []);
+
 
   const addMoveable = () => {
     // Create a new moveable component and add it to the array
